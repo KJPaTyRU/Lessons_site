@@ -1,0 +1,17 @@
+{% extends 'wrapper.html' %}
+{% load static %}
+{% block title %}
+<title>Login</title>
+<link rel="stylesheet" href="{% static 'main/style.css' %}">
+{% endblock %}
+{% block body %}
+{% if failure %}
+<p>Неверное имя пользователя или пароль</p>
+{% endif %}
+<form action="" method="post">
+    {% csrf_token %}
+    <p>Username: {{form.username}}</p>
+    <p>Password: {{form.password}}</p>
+    <p><input type="submit" value="Login"></p>
+</form>
+{% endblock %}

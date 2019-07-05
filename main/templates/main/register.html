@@ -1,0 +1,23 @@
+{% extends 'wrapper.html' %}
+{% load static %}
+{% block title %}
+<title>Register Page</title>
+<link rel="stylesheet" href="{% static 'main/style.css' %}">
+{% endblock %}
+{% block body %}
+{% if auth %}
+<h2>Пользователь уже вошел</h2>
+{{request.user}}
+{% else %}
+{% if failure %}
+<p>Неверное имя пользователя или пароль</p>
+{% endif %}
+<form action="" method="post">
+    {% csrf_token %}
+    <p>Username: {{form.username}}</p>
+    <p>Password: {{form.password1}}</p>
+    <p>RE-Password: {{form.password2}}</p>
+    <p><input type="submit" value="Register"></p>
+</form>
+{% endif %}
+{% endblock %}

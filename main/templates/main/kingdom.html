@@ -5,7 +5,5 @@
 <link rel="stylesheet" href="{% static 'main/style.css' %}">
 {% endblock %}
 {% block body %}
-<p>Hello!</p>
-<input type="submit" value="Logout" name="logout">
-<hr>
+<h2>Welcome to our KINGDOM, dear {{request.user.username.capitalize}}</h2>
 {% endblock %}

@@ -1,0 +1,17 @@
+p, a, div, h1,h2,h3,h4,h5,h6, ul,ol,li {
+  box-sizing: border-box;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 50%;
+}
+
+.footer > a{
+  text-decoration: none;
+  color: black;
+  font-size: 1.3em;
+}

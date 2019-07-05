@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from . import forms
 
 # Create your views here.
 
 def index(request):
+
     return render(request, 'main/index.html')
 
 
@@ -40,12 +42,35 @@ def register(request):
             if password1 == password2:
                 user = User.objects.create_user(username, password=password1)
                 login(request, user)
-                return redirect('/')
+                return redirect('main:index')
             else:
                 return render(request, 'main/register.html', context={'failure': True,
                                                                    'form': form})
 
         return render(request, 'main/register.html', {'form':form})
+
+@login_required
+def kingdom(request):
+    return render(request, 'main/kingdom.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

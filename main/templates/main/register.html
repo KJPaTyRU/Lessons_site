@@ -5,12 +5,15 @@
 <link rel="stylesheet" href="{% static 'main/style.css' %}">
 {% endblock %}
 {% block body %}
-{% if auth %}
+{% if request.user.is_authenticated %}
 <h2>Пользователь уже вошел</h2>
 {{request.user}}
 {% else %}
-{% if failure %}
-<p>Неверное имя пользователя или пароль</p>
+{% if pas_failure %}
+<p>Неверный пароль</p>
+{% endif %}
+{% if user_failure %}
+<p>Пользователь с именем {{ username }} уже существует. Пожалуйста придумайте новый логин.</p>
 {% endif %}
 <form action="" method="post">
     {% csrf_token %}

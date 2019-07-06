@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'send_email.apps.SendEmailConfig',
     'main'
 ]
 
@@ -124,3 +125,13 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_URL)
 
 LOGIN_URL = '/'
+
+# AUTH_USER_MODEL = 'main.CustomUser'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'druidmasterbro@gmail.com'
+EMAIL_HOST_PASSWORD = '1KDt0o1z72s9!'
+DEFAULT_FROM_EMAIL = 'DB'
+DEFAULT_TO_EMAIL = 'lzdragonmens@gmail.com'

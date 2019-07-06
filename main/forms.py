@@ -1,5 +1,12 @@
 from django import forms
+from . import models
 
+
+# class CustomUserForm(forms.ModelForm):
+#
+#     class Meta:
+#         model = models.CustomUser
+#         fields = '__all__'
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=255)

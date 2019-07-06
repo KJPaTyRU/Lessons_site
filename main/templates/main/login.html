@@ -8,10 +8,14 @@
 {% if failure %}
 <p>Неверное имя пользователя или пароль</p>
 {% endif %}
+{% if not request.user.is_authenticated %}
 <form action="" method="post">
     {% csrf_token %}
     <p>Username: {{form.username}}</p>
     <p>Password: {{form.password}}</p>
     <p><input type="submit" value="Login"></p>
 </form>
+{% else %}
+<h3>Пользователь уже вошел как {{ request.user.username.capitalize }}</h3>
+{% endif %}
 {% endblock %}

@@ -1,3 +1,4 @@
+from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -32,47 +33,44 @@ def login_page(request):
 def register(request):
     # creating register form and saving new user in db
     form = forms.RegisterForm()
-    if request.user.is_authenticated:
-        return render(request, 'main/register.html', context={'auth':True})
-    else:
-        if request.method == "POST":
-            username = request.POST['username']
-            password1 = request.POST['password1']
-            password2 = request.POST['password2']
-            if password1 == password2:
+    if request.method == "POST":
+        username = request.POST['username']
+        password1 = request.POST['password1']
+        password2 = request.POST['password2']
+        if password1 == password2:
+            from django.db import IntegrityError;
+            try:
                 user = User.objects.create_user(username, password=password1)
                 login(request, user)
-                return redirect('main:index')
-            else:
-                return render(request, 'main/register.html', context={'failure': True,
-                                                                   'form': form})
+                return redirect('/')
+            except IntegrityError:
+                return render(request, 'main/register.html', context={'user_failure': True,
+                                                                      'username': username,
+                                                                      'form': form})
+        else:
+            return render(request, 'main/register.html', context={'pas_failure': True,
+                                                               'form': form})
 
-        return render(request, 'main/register.html', {'form':form})
+    return render(request, 'main/register.html', {'form':form})
 
 @login_required
 def kingdom(request):
     return render(request, 'main/kingdom.html')
 
 
+@login_required
+def logout_page(request):
+    logout(request)
+    return redirect("/")
 
 
+def send_m(request):
+    header = "Privet, Steave!"
+    content = "Testing API"
+    author = "druidmasterbro@gmail.com"
+    reciver = ["lzdragonmens@gmail.com"]
 
+    send_mail(header, content, author, reciver, fail_silently=False)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    return redirect('/')
 # hi
